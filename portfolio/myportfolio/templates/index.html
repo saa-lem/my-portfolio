@@ -1,0 +1,140 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Slider -->
+<section id="hero-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="block wow fadeInUp" data-wow-delay=".3s">
+                    <section class="cd-intro">
+                        <h1 class="wow fadeInUp animated cd-headline slide" data-wow-delay=".4s">
+                            <span>HI, MY NAME  IS SALEM & I AM A</span><br>
+                            <span class="cd-words-wrapper">
+                                <b class="is-visible">DESIGNER</b>
+                                <b>DEVELOPER</b>
+                            </span>
+                        </h1>
+                    </section>
+                    <h2 class="wow fadeInUp animated" data-wow-delay=".6s">
+                        With 4 years experience, I've occupied many roles including graphic designer,<br> web designer and developer. This site showcases some of my work.
+                    </h2>
+                    <a class="btn-lines dark light wow fadeInUp animated smooth-scroll btn btn-default btn-green" data-wow-delay=".9s" href="#works" data-section="#works">View Works</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Slider -->
+
+<!-- About Me -->
+<section id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="block wow fadeInLeft" data-wow-delay=".3s" data-wow-duration="500ms">
+                    <h2>ABOUT ME</h2>
+                    <p>I'm a Full Stack Developer from Nairobi, Kenya. Am also a freelance graphic designer with extensive experience in the information technology and services industry. I have a knack for user experience and beautiful interfaces with a focus in becoming a fully-fledged Fullstack Developer.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="block wow fadeInRight" data-wow-delay=".3s" data-wow-duration="500ms">
+                    <img src="{% static 'images/about.jpg' %}" class="img-responsive" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End About Me -->
+
+<!-- Portfolio -->
+<section id="works" class="works">
+    <div class="container">
+        <div class="section-heading">
+            <h1 class="title wow fadeInDown" data-wow-delay=".3s">Latest Work</h1>
+            <p class="wow fadeInDown" data-wow-delay=".5s">Below are some of the projects that I have gotten opportunity to work on.</p>
+        </div>
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-sm-4 col-xs-12">
+                <figure class="wow fadeInLeft animated portfolio-item" data-wow-duration="500ms" data-wow-delay="0ms">
+                    <div class="img-wrapper">
+                        <img src="{{project.image.url}}" class="img-responsive" alt="">
+                        <div class="overlay">
+                            <div class="buttons">
+                                <a rel="gallery" class="fancybox" href="">Full Image</a>
+                                <a href="{% url 'project' project.id %}">See Project</a>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption>
+                        <h4>
+                            <a href="">{{project.name}}</a>
+                        </h4>
+                        <p>
+                            {{project.description | truncatechars:50}}
+                        </p>
+                    </figcaption>
+                </figure>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Portfolio End -->
+
+<!-- What I Offer -->
+<section id="feature">
+    <div class="container">
+        <div class="section-heading">
+            <h1 class="title wow fadeInDown" data-wow-delay=".3s">What I Can Do</h1>
+            <p class="wow fadeInDown" data-wow-delay=".5s">
+                My extensive experience has enabled me to pick a lot of skills. Below,<br> are the main ones that I am proficient in.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-lg-4 col-xs-12">
+                <div class="media wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <div class="media-left">
+                        <div class="icon">
+                            <i class="ion-ios-flask-outline"></i>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Graphic Design</h4>
+                        <p>I do graphic designing using mainly Adobe Photoshop and Adobe Illustrator. I also have experience in Corel Draw and in printing.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xs-12">
+                <div class="media wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <div class="media-left">
+                        <div class="icon">
+                            <i class="ion-ios-lightbulb-outline"></i>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Web Design & Development</h4>
+                        <p>I use pen and paper to conceptualize web wireframes and Figma to create prototypes. I develop web applications using Django for backend and Angular for frontend. I can also do WordPress websites.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xs-12">
+                <div class="media wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <div class="media-left">
+                        <div class="icon">
+                            <i class="ion-ios-americanfootball-outline"></i>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Social Media Marketing</h4>
+                        <p>I use Buffer to manage social media pages, create posts for different social media pages, reply to messages and monitor performance of social media pages.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

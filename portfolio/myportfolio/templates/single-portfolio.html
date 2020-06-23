@@ -1,0 +1,79 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="global-page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <h2>{{ project.name }}</h2>
+                    <!-- <div class="portfolio-meta">
+                       <span> website: <a href="#">{{ project.link }}</a></span>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!--/#Page header-->
+
+<section class="portfolio-single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="portfolio-single-img">
+                    <img class="img-responsive" alt="" src="{{ project.image.url }}">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="portfolio-content">
+                    <h3 class="subtitle">Project Details</h3>
+                    <p>
+                        {{ project.description }}
+                    </p>
+                    <p>
+                        Website: <a href="{{ project.link }}" target="_blank">{{ project.link }}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="works works-fit">
+    <div class="container">
+        <h2 class="subtitle">Some Of My Featured Works</h2>
+            <p class="subtitle-des">
+                Below are some of the projects that I have gotten opportunity to work on.
+            </p>
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-sm-3">
+                 <figure class="wow fadeInLeft animated portfolio-item animated" data-wow-duration="300ms" data-wow-delay="0ms" style="visibility: visible; animation-duration: 300ms; -webkit-animation-duration: 300ms; animation-delay: 0ms; -webkit-animation-delay: 0ms; animation-name: fadeInLeft; -webkit-animation-name: fadeInLeft;">
+                    <div class="img-wrapper">
+                        <img src="{{project.image.url}}" class="img-responsive" alt="portfolio items">
+                        <div class="overlay">
+                            <div class="buttons">
+                                <a rel="gallery" title="Proin imperdiet augue et magna interdum hendrerit" class="fancybox" href="{{project.image.url}}">Demo</a>        
+                                <a target="_blank" href="">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption>
+                        <h4>
+                            <a href="#">
+                                {{project.title}}        
+                            </a>
+                        </h4>
+                        <p>
+                            {{project.description|truncatechars:33}}
+                        </p>
+                    </figcaption>
+                </figure>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>  
+{% endblock %}
