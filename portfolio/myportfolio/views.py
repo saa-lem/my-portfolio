@@ -35,7 +35,7 @@ def index(request):
         "message":message,
     }
 
-      return render(request,'templates/index.html',context)
+    return render(request,'templates/index.html',context)
 
 def display_profile(request,username):
     profile = Profile.objects.get(user__username= username)
@@ -46,7 +46,7 @@ def display_profile(request,username):
         "profile":profile,
         "user_properties":user_properties
     }
-       return render(request,'templates/profile_detail.html',context)
+    return render(request,'templates/profile_detail.html',context)
 
 class PropertyListView(ListView):
     
@@ -74,23 +74,23 @@ class PropertyUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
 
 def form_valid(self,form):
         form.instance.profile = self.request.user.profile
-        return super().form_valid(form)
+    return super().form_valid(form)
 
 
 def test_func(self):
         property = self.get_object()
 
         if self.request.user.profile == property.profile:
-            return True
+        return True
 
-        return False
+    return False
 
 def get_redirect_url(self,pk, *args, **kwargs):
         obj = get_object_or_404(Property, pk = pk)
         url= obj.get_absolute_url()
       
       
-        return url
+    return url
 
 
 class PropertyDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
@@ -100,9 +100,9 @@ def test_func(self):
         property = self.get_object()
 
         if self.request.user.profile == property.profile:
-            return True
+    return True
 
-        return False
+    return False
 
 class UserPropertyListView(ListView):
     model = Property
@@ -114,7 +114,7 @@ class UserPropertyListView(ListView):
 def get_queryset(self):
         user = get_object_or_404(User, username = self.kwargs.get('username'))
         
-        return Property.objects.filter(profile=user.profile).order_by('-created_on')
+    return Property.objects.filter(profile=user.profile).order_by('-created_on')
 
 
 
@@ -123,7 +123,7 @@ class PropertyList(APIView):
 def get(self, request, format = None):
         all_properties = Property.objects.all()
         serializers = PropertySerializer(all_properties, many = True)
-        return Response(serializers.data)
+    return Response(serializers.data)
 
 
 
@@ -131,7 +131,7 @@ class ProfileList(APIView):
 def get(self, request, format = None):
         all_profiles = Profile.objects.all()
         serializers = ProfileSerializer(all_profiles, many = True)
-        return Response(serializers.data)
+    return Response(serializers.data)
 
 def hup_find(request):
     if ('properties' in request.GET) and request.GET['properties']:
@@ -144,8 +144,8 @@ def hup_find(request):
             "properties": searched_properties,
            
         } 
-        return render(request, 'search.html',context)
+    return render(request, 'search.html',context)
           
     else:
         message= "Search "
-        return render(request, 'search.html',{'message':message})
+    return render(request, 'search.html',{'message':message})
