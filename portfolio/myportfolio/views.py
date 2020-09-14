@@ -37,7 +37,7 @@ def index(request):
 
       return render(request,'templates/index.html',context)
 
-    def display_profile(request,username):
+def display_profile(request,username):
     profile = Profile.objects.get(user__username= username)
 
     user_properties = Property.objects.filter(profile =profile).order_by('created_on')
@@ -72,12 +72,12 @@ class PropertyUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     fields = ['name','image','description','price','location','size']
 
 
-    def form_valid(self,form):
+def form_valid(self,form):
         form.instance.profile = self.request.user.profile
         return super().form_valid(form)
 
 
-    def test_func(self):
+def test_func(self):
         property = self.get_object()
 
         if self.request.user.profile == property.profile:
@@ -85,7 +85,7 @@ class PropertyUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
 
         return False
 
-    def get_redirect_url(self,pk, *args, **kwargs):
+def get_redirect_url(self,pk, *args, **kwargs):
         obj = get_object_or_404(Property, pk = pk)
         url= obj.get_absolute_url()
       
@@ -96,7 +96,7 @@ class PropertyUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
 class PropertyDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     model = Property
     success_url = ('/')
-    def test_func(self):
+def test_func(self):
         property = self.get_object()
 
         if self.request.user.profile == property.profile:
@@ -111,7 +111,7 @@ class UserPropertyListView(ListView):
     ordering = ['-created_on']
 
 
-    def get_queryset(self):
+def get_queryset(self):
         user = get_object_or_404(User, username = self.kwargs.get('username'))
         
         return Property.objects.filter(profile=user.profile).order_by('-created_on')
@@ -120,7 +120,7 @@ class UserPropertyListView(ListView):
 
 
 class PropertyList(APIView):
-    def get(self, request, format = None):
+def get(self, request, format = None):
         all_properties = Property.objects.all()
         serializers = PropertySerializer(all_properties, many = True)
         return Response(serializers.data)
@@ -128,7 +128,7 @@ class PropertyList(APIView):
 
 
 class ProfileList(APIView):
-    def get(self, request, format = None):
+def get(self, request, format = None):
         all_profiles = Profile.objects.all()
         serializers = ProfileSerializer(all_profiles, many = True)
         return Response(serializers.data)
