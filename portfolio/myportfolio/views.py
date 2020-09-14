@@ -21,12 +21,12 @@ from itertools import chain
 # Create your views here.
 def home(request):
     projects = Project.objects.all()
-      return render(request, 'index.html', {'projects': projects})
+    return render(request, 'index.html', {'projects': projects})
 
 def project(request, project_id):
     project = Project.objects.get(id=project_id)
     projects = Project.objects.all()
-      return render(request, 'single-portfolio.html', {'project': project , 'projects': projects})
+    return render(request, 'single-portfolio.html', {'project': project , 'projects': projects})
 
 def index(request):
     message = "Welcome to our Site"
