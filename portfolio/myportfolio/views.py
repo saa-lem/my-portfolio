@@ -81,7 +81,7 @@ def test_func(self):
         property = self.get_object()
 
         if self.request.user.profile == property.profile:
-        return True
+    return True
 
     return False
 
